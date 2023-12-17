@@ -1,13 +1,10 @@
-let canvas = document.querySelector('.canvas');
+const canvas = document.querySelector('.canvas');
+const clearButton = document.querySelector('.clearButton');
+const gridButton = document.querySelector('.gridButton');
 
 let gridSize = 32;
 
 let isDrawing = false;
-
-let mousePosition = {
-    xPosition: 0,
-    yPosition: 0,
-};
 
 for (let i = 0; i < gridSize; i++) {
 
@@ -23,8 +20,9 @@ for (let i = 0; i < gridSize; i++) {
 
 }
 
-document.addEventListener('mousedown',() => {
+document.addEventListener('mousedown',(event) => {
     isDrawing = true;
+    paintPixel(event);
 });
 
 document.addEventListener('mouseup',() => {
@@ -34,6 +32,16 @@ document.addEventListener('mouseup',() => {
 document.addEventListener('mousemove', paintPixel);
 
 
+clearButton.addEventListener('click', clearCanvas);
+
+
 function paintPixel(event) {
-    if(isDrawing && event.target.classList.contains('pixel')) event.target.classList.add('highlight')
+    if(isDrawing && event.target.classList.contains('pixel')) event.target.classList.add('painted')
+}
+
+function clearCanvas(){
+    let pixels = document.querySelectorAll('.pixel');
+    pixels.forEach((pixel) => {
+        pixel.classList.remove('painted');
+    })
 }
