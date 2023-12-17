@@ -60,3 +60,15 @@ body{
 .painted{
     background-color: beige;
 }
+.grid{
+    border: solid 1px aqua;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+}
+.marker{
+    position: absolute;
+    background-color: red;
+    width: 2px;
+    height: 2px;
+}
