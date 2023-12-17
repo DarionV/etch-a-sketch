@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body{
     height: 100vh;
     display: flex;
@@ -11,12 +10,7 @@ body{
     align-items: center;
     background-color: rgb(151, 151, 151);
 }
-
-
-
-
-
-
+/* --------------------------------------- */
 .frame{
     display: flex;
     flex-direction: column;
@@ -26,7 +20,6 @@ body{
     background-color: rgb(58, 58, 58);
     width: 600px;
 }
-
 .header{
     display: flex;
     justify-content: flex-start;
@@ -37,7 +30,6 @@ body{
     height: 48px;
     margin: 16px 0;
 }
-
 .canvas{
     display: flex;
     flex-direction: column;
@@ -47,27 +39,24 @@ body{
     width: 512px;
     height: 512px;
 }
-
 .buttons{
     background-color: coral;
     width: 512px;
     height: 100px;
     margin: 16px 0;
 }
-
-
-
-
-
+/* --------------------------------------- */
 .row{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .pixel{
-    background-color: blueviolet;
-    width: 32px;
-    height: 32px;
-    border: 1px solid rgb(219, 143, 223);
+    background-color: rgb(22, 22, 22);
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgb(37, 37, 37);
+}
+.highlight{
+    background-color: beige;
 }
