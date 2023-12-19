@@ -6,7 +6,7 @@ let gridSize = 8;
 
 let isDrawing = false;
 
-let PIXEL_SIZE = 16;
+let PIXEL_SIZE = 8;
 let CANVAS_SIZE = 512;
 
 
@@ -24,6 +24,27 @@ document.addEventListener('mousemove', paint);
 
 
 clearButton.addEventListener('click', clearCanvas);
+gridButton.addEventListener('click', toggleGrid);
+
+
+function toggleGrid(){
+    switch(gridSize){
+        case 8: gridSize = 16;
+        break;
+        case 16: gridSize = 32;
+        break;
+        case 32: gridSize = 64;
+        break;
+        case 64: gridSize = 8;
+        break;
+    }
+    clearGrid();
+    generateGrid();
+}
+
+function toggleHighlight(event){
+    event.target.classList.toggle('highlight');
+}
 
 function paint(event){
     //isDrawing = true;
@@ -83,7 +104,7 @@ function generateGrid() {
     for (let i = 0; i < gridSize; i++) {
         let gridX = 0;
         let row = document.createElement('div');
-        row.classList.add('row');
+        row.classList.add('gridRow');
         canvas.appendChild(row);
 
         for (let i = 0; i < gridSize; i++) {
@@ -91,11 +112,32 @@ function generateGrid() {
             grid.classList.add('grid');
             grid.style.left = gridX + 'px';
             grid.style.top = gridY + 'px';
+            switch(gridSize){
+                case 8: grid.classList.add('size8');
+                break;
+                case 16: grid.classList.add('size16');
+                break;
+                case 32: grid.classList.add('size32');
+                break;
+                case 64: grid.classList.add('size64');
+                break;
+                default: grid.classList.add('size32');
+            }
+            grid.addEventListener('mouseenter', toggleHighlight);
+            grid.addEventListener('mouseleave', toggleHighlight);
             row.appendChild(grid);
             gridX += CANVAS_SIZE / gridSize;
         }
         gridY += CANVAS_SIZE / gridSize;
     }
+}
+
+function clearGrid(){
+    let gridList = document.querySelectorAll('.gridRow');
+    let gridArray = [...gridList];
+    gridArray.forEach((element)=>{
+        element.remove();
+    })
 }
 
 generatePixels();
