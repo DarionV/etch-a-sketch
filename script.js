@@ -1,10 +1,15 @@
 const canvas = document.querySelector('.canvas');
 const clearButton = document.querySelector('.clearButton');
 const gridButton = document.querySelector('.gridButton');
+const whiteButton = document.querySelector('.button.white');
+const blackButton = document.querySelector('.button.black');
+const gridToggleButton = document.querySelector('.button.toggleGrid');
 
 let gridSize = 8;
 
 let isDrawing = false;
+let isErasing = false;
+let isGridVisible = false;
 
 let PIXEL_SIZE = 8;
 let CANVAS_SIZE = 512;
@@ -14,6 +19,7 @@ let CANVAS_SIZE = 512;
 document.addEventListener('mousedown',(event)=>{
     isDrawing=true 
     paint(event);
+    event.preventDefault();
 });
 
 document.addEventListener('mouseup',() => {
@@ -24,10 +30,34 @@ document.addEventListener('mousemove', paint);
 
 
 clearButton.addEventListener('click', clearCanvas);
-gridButton.addEventListener('click', toggleGrid);
-
+gridButton.addEventListener('click', changeGrid);
+whiteButton.addEventListener('click', ()=>{
+    isErasing = false;
+})
+blackButton.addEventListener('click', ()=>{
+    isErasing = true;
+})
+gridToggleButton.addEventListener('click', toggleGrid);
 
 function toggleGrid(){
+    let gridList = document.querySelectorAll('.grid');
+    let gridArray = [...gridList];
+    
+    if (isGridVisible) {
+        isGridVisible = false;
+        gridArray.forEach((element)=>{
+            element.classList.remove('highlight');
+        });
+    } else{
+        isGridVisible = true;
+        gridArray.forEach((element)=>{
+            element.classList.add('highlight');
+        });
+    }
+}
+
+
+function changeGrid(){
     switch(gridSize){
         case 8: gridSize = 16;
         break;
@@ -43,7 +73,7 @@ function toggleGrid(){
 }
 
 function toggleHighlight(event){
-    event.target.classList.toggle('highlight');
+   if(!isGridVisible) event.target.classList.toggle('highlight');
 }
 
 function paint(event){
@@ -64,7 +94,14 @@ function paint(event){
             for (let i = PIXEL_SIZE; i <= CANVAS_SIZE / gridSize; i += PIXEL_SIZE){
                 let elements = document.elementsFromPoint(coordinateToPaintX,coordinateToPaintY);
                 //index 1 is always a div element with class "pixel".
-                elements[1].classList.add('painted');
+                if(!isErasing) {
+                     elements[1].classList.add('paintedWhite');
+                     elements[1].classList.remove('paintedBlack');
+                }
+                else {
+                     elements[1].classList.add('paintedBlack');
+                     elements[1].classList.remove('paintedWhite');
+                }
                 coordinateToPaintX += PIXEL_SIZE;
             }
             coordinateToPaintY += PIXEL_SIZE;
@@ -79,7 +116,7 @@ function paintPixel(event) {
 function clearCanvas(){
     let pixels = document.querySelectorAll('.pixel');
     pixels.forEach((pixel) => {
-        pixel.classList.remove('painted');
+        pixel.classList.remove('paintedWhite');
     })
 }
 
@@ -125,6 +162,7 @@ function generateGrid() {
             }
             grid.addEventListener('mouseenter', toggleHighlight);
             grid.addEventListener('mouseleave', toggleHighlight);
+            if(isGridVisible) grid.classList.add('highlight');
             row.appendChild(grid);
             gridX += CANVAS_SIZE / gridSize;
         }
