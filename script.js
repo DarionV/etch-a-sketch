@@ -93,14 +93,15 @@ function paint(event){
 
             for (let i = PIXEL_SIZE; i <= CANVAS_SIZE / gridSize; i += PIXEL_SIZE){
                 let elements = document.elementsFromPoint(coordinateToPaintX,coordinateToPaintY);
-                //index 1 is always a div element with class "pixel".
+                console.log(elements);
+                //index 2 is always a div element with class "pixel".
                 if(!isErasing) {
-                     elements[1].classList.add('paintedWhite');
-                     elements[1].classList.remove('paintedBlack');
+                     elements[2].classList.add('paintedWhite');
+                     elements[2].classList.remove('paintedBlack');
                 }
                 else {
-                     elements[1].classList.add('paintedBlack');
-                     elements[1].classList.remove('paintedWhite');
+                     elements[2].classList.add('paintedBlack');
+                     elements[2].classList.remove('paintedWhite');
                 }
                 coordinateToPaintX += PIXEL_SIZE;
             }
