@@ -30,6 +30,12 @@ body{
     height: 48px;
     margin: 16px 0;
 }
+.monitor{
+    width: 512px;
+    height: 512px;
+    border-radius: 20px;
+    overflow: hidden;
+}
 .canvas{
     display: flex;
     flex-direction: column;
@@ -55,7 +61,7 @@ body{
     position: absolute;
     background: linear-gradient(rgb(17, 17, 17) 50%, rgba(0, 0, 0, 0.25) 50%);
     background-size: 100% 5px, 20px 100%;
-    animation: scanline 2s infinite;
+    animation: scanline 0.2s linear infinite;
 
 }
 .buttons{
