@@ -9,8 +9,9 @@
 </head>
 <body>
     <div class="frame">
+        <div class="noise"></div>
         <div class="header">
-            <img src="images/logo.png" alt="Etch-a-sketch-logo" height="32px">
+            <img src="images/logo.png" alt="Etch-a-sketch-logo" height="64px">
         </div>
         <div class="monitor">
             
@@ -22,11 +23,25 @@
             </div>
         </div>
         <div class="buttons">
-            <button class="button white">White</button>
-            <button class="button black">Black</button>
-            <button class="clearButton">Clear</button>
-            <button class="gridButton">Change grid size</button>
-            <button class="button toggleGrid">Toggle grid</button>
+            <div class="titles">
+                <h3>Paint</h3>
+                <h3>Clear</h3>
+                <h3>Brush size</h3>
+                <h3>Show grid</h3>
+            </div>
+            <div class="elements">
+                <button class="paintButton toggle on"></button>
+                <button class="clearButton"></button>
+                <button class="gridButton">Change grid size</button>
+                <button class="button toggleGrid toggle off"></button>
+            </div>
+            <div class="titles">
+                <h3>Erase</h3>
+                <h3></h3>
+                <h3></h3>
+                <h3>Hide grid</h3>
+            </div>
+           
         </div>
     </div>
 </body>

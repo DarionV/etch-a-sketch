@@ -1,8 +1,7 @@
 const canvas = document.querySelector('.canvas');
 const clearButton = document.querySelector('.clearButton');
 const gridButton = document.querySelector('.gridButton');
-const whiteButton = document.querySelector('.button.white');
-const blackButton = document.querySelector('.button.black');
+const paintButton = document.querySelector('.paintButton');
 const gridToggleButton = document.querySelector('.button.toggleGrid');
 
 let gridSize = 8;
@@ -31,15 +30,19 @@ document.addEventListener('mousemove', paint);
 
 clearButton.addEventListener('click', clearCanvas);
 gridButton.addEventListener('click', changeGrid);
-whiteButton.addEventListener('click', ()=>{
-    isErasing = false;
+paintButton.addEventListener('click', ()=>{
+    (isErasing) ? isErasing = false : isErasing = true;
+    paintButton.classList.toggle('off');
+    paintButton.classList.toggle('on');
 })
-blackButton.addEventListener('click', ()=>{
-    isErasing = true;
-})
+
 gridToggleButton.addEventListener('click', toggleGrid);
 
 function toggleGrid(){
+
+    gridToggleButton.classList.toggle('off');
+    gridToggleButton.classList.toggle('on');
+
     let gridList = document.querySelectorAll('.grid');
     let gridArray = [...gridList];
     
@@ -93,11 +96,8 @@ function paint(event){
 
             for (let i = PIXEL_SIZE; i <= CANVAS_SIZE / gridSize; i += PIXEL_SIZE){
                 let elements = document.elementsFromPoint(coordinateToPaintX,coordinateToPaintY);
-                //console.log('elements: ' + elements[4].classList);
-
                 let pixelsToPaint = elements.find(checkPixel);
                 
-
                 if(!isErasing) {
                     pixelsToPaint.classList.add('paintedWhite');
                     pixelsToPaint.classList.remove('paintedBlack');
@@ -105,9 +105,7 @@ function paint(event){
                 else {
                      pixelsToPaint.classList.add('paintedBlack');
                      pixelsToPaint.classList.remove('paintedWhite');
-                }
-                
-
+                }    
                 coordinateToPaintX += PIXEL_SIZE;
             }
             coordinateToPaintY += PIXEL_SIZE;
