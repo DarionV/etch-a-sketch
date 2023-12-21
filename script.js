@@ -18,7 +18,7 @@ let CANVAS_SIZE = 512;
 document.addEventListener('mousedown',(event)=>{
     isDrawing=true 
     paint(event);
-    event.preventDefault();
+    //event.preventDefault();
 });
 
 document.addEventListener('mouseup',() => {

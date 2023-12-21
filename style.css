@@ -12,7 +12,7 @@ body{
     font-family: 'Raleway', sans-serif;
 }
 h3{
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     
 }
@@ -47,14 +47,14 @@ h3{
     overflow: hidden;
 }
 .light{
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     background-color: rgb(141, 240, 141);
-    box-shadow: inset 0px 0px 3px rgb(19, 78, 34);
+    box-shadow: inset 0px 0px 3px rgb(19, 78, 34), 0px 0px 2px greenyellow, 0px 1px 2px rgb(97, 97, 97);
     position: absolute;
     top: 16px;
     left: 16px;
-    border: 2px solid rgb(17, 17, 17);
+    /* border: 2px solid rgb(17, 17, 17); */
     border-radius: 6px;
 }
 .grate{
@@ -113,7 +113,7 @@ h3{
     position: absolute;
     background: linear-gradient(rgba(255, 255, 255, 0.1) 50%, rgba(0, 0, 0, 0.1) 50%);
     background-size: 100% 3px, 20px 100%;
-    animation: scanlines 0.9s linear infinite;
+    animation: scanlines 2s linear infinite;
     z-index: 12;
 }
 .scanline{
@@ -140,7 +140,6 @@ h3{
 }
 .elements{
     display: flex;
-    justify-content: space-around;
     align-items: center;
     width: 100%;
     height: 100%;
@@ -151,8 +150,34 @@ h3{
     align-items: center;
     justify-content: center;
     color: rgb(232, 234, 216);
-    width: 100%;
+    
     height: 100%;
+}
+.toggleContainer{
+    width: 80px;
+    margin: 0;
+}
+.sliderContainer{
+    margin: 0px 40px;
+}
+.size{
+    background-color: rgb(220, 221, 207);
+}
+.size.small{
+    width: 4px;
+    height: 4px;
+}
+.size.medium{
+    width: 6px;
+    height: 6px;
+}
+.size.large{
+    width: 8px;
+    height: 8px;
+}
+.size.xlarge{
+    width: 10px;
+    height: 10px;
 }
 .buttonTitle{
     margin-bottom: auto;
@@ -165,6 +190,14 @@ h3{
     margin-bottom: 5px;
     width: 100%;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items:baseline;
+    padding: 0px 5px;
+}
+.buttonSubTitle.dots{
+    justify-content: space-between;
+    margin-bottom: 16px;
 }
 .buttonContainer{
     display: flex;
@@ -179,40 +212,36 @@ h3{
     color: white;
 }
 button.toggle.on {
-    all: unset;
-    background-image: url(images/toggle_on.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 48px;
-    height: 48px;
     cursor: pointer;
+    width: 36px;
+    height: 48px;
+    rotate: 180deg;
+    background: linear-gradient(rgb(22, 22, 22)10%,rgb(56, 56, 56) 20%,rgb(39, 39, 39) 21%,black 50%, rgb(32, 32, 32) 51%);
+    box-shadow: inset 0px 1px 2px rgb(0, 0, 0), inset 0px -2px 2px rgb(0, 0, 0), 0px -2px 1px 1px rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    border: none;
 }
 button.toggle.off{
-    all: unset;
-    background-image: url(images/toggle_off.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 48px;
-    height: 48px;
     cursor: pointer;
+    width: 36px;
+    height: 48px;
+    background: linear-gradient(rgb(32, 32, 32),rgb(85, 85, 85) 20%,rgb(42, 42, 42) 21%,black 60%, rgb(32, 32, 32) 61%);
+    box-shadow: inset 0px -1px 2px rgb(0, 0, 0), inset 0px 2px 2px rgb(0, 0, 0), 0px 2px 1px 1px rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    border: none;
 }
 .clearButton{
-    all: unset;
-    background-image: url(images/buttonClear.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 48px;
-    height: 48px;
+    width: 100px;
+    height: 32px;
     cursor: pointer;
+    border: none;
+    background-color: rgb(86, 59, 59);
+    border-radius: 4px;
+    color: rgb(193, 194, 182);
+    box-shadow: inset 0px -2px 2px rgb(15, 15, 15), 0px 1px 1px rgb(60, 60, 60), 0px -2px 3px rgb(0, 0, 0);
 }
 .clearButton:active{
-    all: unset;
-    background-image: url(images/buttonClear_pressed.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 48px;
-    height: 48px;
-    cursor: pointer;
+    box-shadow: inset 0px -2px 2px rgb(15, 15, 15), 0px 1px 1px rgb(60, 60, 60), 0px -2px 3px rgb(0, 0, 0), inset 0px 0px 5px 5px rgba(0, 0, 0, 0.4);
 }
 /* --------------------------------------- */
 .row{
@@ -349,7 +378,7 @@ button.toggle.off{
         translate: 0px 0px;
     }
     100% {
-        translate: 0px 5px;
+        translate: 0px 18px;
     }
   }
   @keyframes scanline {
@@ -361,7 +390,26 @@ button.toggle.off{
     }
   }
   .slider{
+    -webkit-appearance: none;
+    appearance: none;
     width: 150px;
+    height: 4px;
+    background-color: black;
+    box-shadow: inset 0 -1px 1px rgb(65, 65, 65);
+  }
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 15px;
+    height: 30px; 
+    /* background: #454545;  */
+    background: linear-gradient(#454545,#707070,#454545);
+    border-radius: 4px;
+    cursor: pointer; 
+    box-shadow: inset 0px -1px 1px 1px rgb(0, 0, 0), inset 0px 1px 1px rgb(133, 133, 133);
+  }
+
+  .slider::-moz-range-thumb {
   }
  
    

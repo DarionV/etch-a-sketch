@@ -37,27 +37,30 @@
         </div>
         <div class="buttons">
             <div class="elements">
-                <div>
+                <div class="toggleContainer">
                     <div class="buttonTitle"><h3>Paint</h3></div>
                     <div class="buttonContainer"><button class="paintButton toggle on"></button></div>
                     <div class="buttonSubTitle"><h3>Erase</h3></div>
                 </div>
-                <div>
-                    <div class="buttonTitle"></div>
-                    <div class="buttonContainer"><button class="clearButton"></button></div>
-                    <div class="buttonSubTitle"></div>
-                </div>
-                <div>
-                    <div class="buttonTitle"><h3>Brush size</h3></div>
-                      <div class="slidercontainer">
-                        <input type="range" min="1" max="4" value="2" class="slider" id="grid-slider" step="1">
-                      </div>
-                    <div class="buttonSubTitle">S - M - L</div>
-                </div>
-                <div>
+                <div class="toggleContainer">
                     <div class="buttonTitle"><h3>Show grid</h3></div>
                     <div class="buttonContainer"><button class="button toggleGrid toggle off"></button></div>
                     <div class="buttonSubTitle"><h3>Hide grid</h3></div>
+                </div>
+                <div class="sliderContainer">
+                    <div class="buttonTitle"><h3>Brush size</h3></div>
+                        <input type="range" min="1" max="4" value="2" class="slider" id="grid-slider" step="1">
+                    <div class="buttonSubTitle dots">
+                        <div class="size small"></div>
+                        <div class="size medium"></div>
+                        <div class="size large"></div>
+                        <div class="size xlarge"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="buttonTitle"></div>
+                    <div class="buttonContainer"><button class="clearButton">Reset canvas</button></div>
+                    <div class="buttonSubTitle"></div>
                 </div>
             </div>      
         </div>
