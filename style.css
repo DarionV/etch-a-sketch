@@ -70,6 +70,7 @@ h3{
     margin-right:80px;
 }
 .monitor{
+    box-sizing: initial;
     width: 512px;
     height: 512px;
     border-radius: 20px;
@@ -78,14 +79,14 @@ h3{
     box-shadow: 0px 0px 4px 2px rgb(0, 0, 0);
 }
 .screen {
-    width: 500px;
-    height: 500px;
+    width: 511px;
+    height: 511px;
     background-image: url('images/monitor.png');
     opacity: 70%;
     position: absolute;
     box-shadow: inset 0px 0px 20px 20px rgb(0, 0, 0);
-    margin-left: -15px;
-    margin-top: -15px;
+    /* margin-left: -15px;
+    margin-top: -15px; */
 }
 
 .canvas{
@@ -193,7 +194,7 @@ h3{
     display: flex;
     justify-content: center;
     align-items:baseline;
-    padding: 0px 5px;
+    padding-left:2px;
 }
 .buttonSubTitle.dots{
     justify-content: space-between;
