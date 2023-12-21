@@ -1,10 +1,10 @@
 const canvas = document.querySelector('.canvas');
 const clearButton = document.querySelector('.clearButton');
-//const gridButton = document.querySelector('.gridButton');
 const paintButton = document.querySelector('.paintButton');
 const gridToggleButton = document.querySelector('.button.toggleGrid');
+const gridSlider = document.querySelector('#grid-slider');
 
-let gridSize = 8;
+let gridSize = 64;
 
 let isDrawing = false;
 let isErasing = false;
@@ -18,7 +18,6 @@ let CANVAS_SIZE = 512;
 document.addEventListener('mousedown',(event)=>{
     isDrawing=true 
     paint(event);
-    //event.preventDefault();
 });
 
 document.addEventListener('mouseup',() => {
@@ -29,19 +28,52 @@ document.addEventListener('mousemove', paint);
 
 
 clearButton.addEventListener('click', clearCanvas);
-// gridButton.addEventListener('click', changeGrid);
 paintButton.addEventListener('click', ()=>{
     (isErasing) ? isErasing = false : isErasing = true;
     paintButton.classList.toggle('off');
     paintButton.classList.toggle('on');
 })
+gridSlider.oninput = function() {
+    changeGridSize(this.value);
+}
 
-gridToggleButton.addEventListener('click', toggleGrid);
+gridSlider.addEventListener('mousedown',()=>{
+    if(!isGridVisible && gridToggleButton.classList.contains('off')) {
+        toggleGrid(false);
+    }
+})
 
-function toggleGrid(){
+gridSlider.addEventListener('mouseup', ()=>{
+    if(isGridVisible && gridToggleButton.classList.contains('off')) {
+        toggleGrid(false);
+    }
+}) 
 
+
+gridToggleButton.addEventListener('click', ()=> {toggleGrid(true)});
+
+function changeGridSize(size){
+    switch(size){
+        case '1': gridSize = 64;
+        break;
+        case '2': gridSize = 32;
+        break;
+        case '3': gridSize = 16;
+        break;
+        case '4': gridSize = 8;
+        break;
+        default: gridSize = 8;
+    }
+    clearGrid();
+    generateGrid();
+}
+
+function toggleGrid(shouldToggleButton){
+
+    if(shouldToggleButton){
     gridToggleButton.classList.toggle('off');
     gridToggleButton.classList.toggle('on');
+    }
 
     let gridList = document.querySelectorAll('.grid');
     let gridArray = [...gridList];
@@ -82,10 +114,12 @@ function toggleHighlight(event){
 function paint(event){
     //isDrawing = true;
     // paintPixel(event);
+    
 
     if(!event.target.classList.contains('grid') || !isDrawing) {
         return
     } else {
+        event.preventDefault();
         let targetPixel = document.elementFromPoint(event.clientX,event.clientY);
         let rect = targetPixel.getBoundingClientRect();
 
