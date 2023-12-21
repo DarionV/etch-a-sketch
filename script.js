@@ -1,6 +1,6 @@
 const canvas = document.querySelector('.canvas');
 const clearButton = document.querySelector('.clearButton');
-const gridButton = document.querySelector('.gridButton');
+//const gridButton = document.querySelector('.gridButton');
 const paintButton = document.querySelector('.paintButton');
 const gridToggleButton = document.querySelector('.button.toggleGrid');
 
@@ -29,7 +29,7 @@ document.addEventListener('mousemove', paint);
 
 
 clearButton.addEventListener('click', clearCanvas);
-gridButton.addEventListener('click', changeGrid);
+// gridButton.addEventListener('click', changeGrid);
 paintButton.addEventListener('click', ()=>{
     (isErasing) ? isErasing = false : isErasing = true;
     paintButton.classList.toggle('off');

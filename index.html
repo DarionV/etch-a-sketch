@@ -6,12 +6,25 @@
     <title>etch-a-sketch</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="frame">
         <div class="noise"></div>
+        <div class="light"></div>
         <div class="header">
             <img src="images/logo.png" alt="Etch-a-sketch-logo" height="64px">
+            <div class="grate"></div>
+            <div class="grate"></div>
+            <div class="grate"></div>
+            <div class="grate"></div>
+            <div class="grate"></div>
+            <div class="grate"></div>
+            <div class="grate"></div>
+            <div class="grate"></div>
+            <div class="grate"></div>
         </div>
         <div class="monitor">
             
@@ -23,26 +36,32 @@
             </div>
         </div>
         <div class="buttons">
-            <div class="titles">
-                <h3>Paint</h3>
-                <h3>Clear</h3>
-                <h3>Brush size</h3>
-                <h3>Show grid</h3>
-            </div>
             <div class="elements">
-                <button class="paintButton toggle on"></button>
-                <button class="clearButton"></button>
-                <button class="gridButton">Change grid size</button>
-                <button class="button toggleGrid toggle off"></button>
-            </div>
-            <div class="titles">
-                <h3>Erase</h3>
-                <h3></h3>
-                <h3></h3>
-                <h3>Hide grid</h3>
-            </div>
-           
+                <div>
+                    <div class="buttonTitle"><h3>Paint</h3></div>
+                    <div class="buttonContainer"><button class="paintButton toggle on"></button></div>
+                    <div class="buttonSubTitle"><h3>Erase</h3></div>
+                </div>
+                <div>
+                    <div class="buttonTitle"></div>
+                    <div class="buttonContainer"><button class="clearButton"></button></div>
+                    <div class="buttonSubTitle"></div>
+                </div>
+                <div>
+                    <div class="buttonTitle"><h3>Brush size</h3></div>
+                      <div class="slidercontainer">
+                        <input type="range" min="1" max="4" value="2" class="slider" id="grid-slider" step="1">
+                      </div>
+                    <div class="buttonSubTitle">S - M - L</div>
+                </div>
+                <div>
+                    <div class="buttonTitle"><h3>Show grid</h3></div>
+                    <div class="buttonContainer"><button class="button toggleGrid toggle off"></button></div>
+                    <div class="buttonSubTitle"><h3>Hide grid</h3></div>
+                </div>
+            </div>      
         </div>
     </div>
+    <!-- copyright <a href="https://www.freepik.com/free-photo/wooden-texture_1000699.htm#query=table%20texture&position=10&from_view=search&track=ais&uuid=84d816c8-936f-436d-9583-94105b6dd605">Image by lyashenko</a> on Freepik -->
 </body>
 </html>

@@ -9,9 +9,12 @@ body{
     justify-content: center;
     align-items: center;
     background-color: rgb(174, 174, 174);
+    font-family: 'Raleway', sans-serif;
 }
 h3{
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 400;
+    
 }
 /* --------------------------------------- */
 .frame{
@@ -23,12 +26,14 @@ h3{
     background-color: rgb(27, 27, 27);
     border-radius: 20px;
     border: solid 5px rgb(64, 64, 64); 
-    box-shadow: inset 0px 0px 5px 5px rgba(0, 0, 0, 0.265);
+    box-shadow: inset 0px 0px 5px 5px rgba(0, 0, 0, 0.265), 0px 10px 10px 5px rgba(0, 0, 0, 0.541);
     width: 600px;
 
     background-image: url('images/noise.png');
     background-size: 300px;
     background-repeat: repeat; 
+
+    position: relative;
 }
 .header{
     display: flex;
@@ -40,6 +45,29 @@ h3{
     /* background-color: rgb(170, 170, 170); */
     /* border-radius: 10px; */
     overflow: hidden;
+}
+.light{
+    width: 12px;
+    height: 12px;
+    background-color: rgb(141, 240, 141);
+    box-shadow: inset 0px 0px 3px rgb(19, 78, 34);
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    border: 2px solid rgb(17, 17, 17);
+    border-radius: 6px;
+}
+.grate{
+    width: 7px;
+    height: 100%;
+    background-color: rgb(15, 15, 15);
+    box-shadow: inset 0px -0.5px 1px rgb(157, 157, 157);
+    margin: 0px 4px;
+    border-radius: 2px;
+    rotate: 10deg;
+}
+.header>img{
+    margin-right:80px;
 }
 .monitor{
     width: 512px;
@@ -110,16 +138,42 @@ h3{
     justify-content: space-around;
     align-items: center;
 }
-.elements, .titles{
+.elements{
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    height: 100%;
 }
-.pushLeft{
-    justify-content: flex-start;
-    margin-left: 90px;
+.elements>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgb(232, 234, 216);
+    width: 100%;
+    height: 100%;
 }
+.buttonTitle{
+    margin-bottom: auto;
+    margin-top: 5px;
+    width: 100%;
+    text-align: center;
+}
+.buttonSubTitle{
+    margin-top: auto;
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: center;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
 
 .titles{
     color: white;
@@ -145,6 +199,15 @@ button.toggle.off{
 .clearButton{
     all: unset;
     background-image: url(images/buttonClear.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+}
+.clearButton:active{
+    all: unset;
+    background-image: url(images/buttonClear_pressed.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 48px;
@@ -297,6 +360,11 @@ button.toggle.off{
         translate: 0px 3300px;
     }
   }
+  .slider{
+    width: 150px;
+  }
+ 
+   
 
 
 
