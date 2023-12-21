@@ -6,17 +6,40 @@
 body{
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgb(174, 174, 174);
     font-family: 'Raleway', sans-serif;
+    overflow: hidden;
 }
 h3{
     font-size: 12px;
     font-weight: 400;
     
 }
+.footer{
+    width: 100%;
+    margin-top: auto;
+    padding: 8px 0px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 /* --------------------------------------- */
+.cord {
+    background-image: url(images/cord.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 650px;
+    height: 650px;
+    position:absolute;
+    /* top:470px;
+    left:-130px; */
+    rotate: -20deg;
+    translate: -520px 400px;
+}
 .frame{
     display: flex;
     flex-direction: column;
@@ -34,6 +57,7 @@ h3{
     background-repeat: repeat; 
 
     position: relative;
+    margin-top: 6px;
 }
 .header{
     display: flex;
@@ -41,9 +65,7 @@ h3{
     align-items: center;
     width: 512px;
     height: 48px;
-    margin: 16px 0;
-    /* background-color: rgb(170, 170, 170); */
-    /* border-radius: 10px; */
+    margin: 8px 0;
     overflow: hidden;
 }
 .light{
@@ -59,7 +81,7 @@ h3{
 }
 .grate{
     width: 7px;
-    height: 100%;
+    height: 90%;
     background-color: rgb(15, 15, 15);
     box-shadow: inset 0px -0.5px 1px rgb(157, 157, 157);
     margin: 0px 4px;
@@ -129,7 +151,7 @@ h3{
 .buttons{
     background-color: rgb(27, 27, 27);
     width: 512px;
-    height: 100px;
+    height: 80px;
     margin: 16px 0;
     border-radius: 10px;
     border: 1px solid black;
@@ -212,6 +234,7 @@ h3{
 .titles{
     color: white;
 }
+
 button.toggle.on {
     cursor: pointer;
     width: 36px;
