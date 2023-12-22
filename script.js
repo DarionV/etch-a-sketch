@@ -7,7 +7,7 @@ const technicolorButton = document.querySelector('.technicolor');
 
 const technicolor = ['3e8dcf', '883274', 'd9373a', 'e26e38', 'fced4f', '4aa44d','cedb51','53b6ed','204c9d','5f318c','f6c546'];
 
-let gridSize = 64;
+let gridSize = 16;
 
 let isDrawing = false;
 let isErasing = false;
