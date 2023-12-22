@@ -76,7 +76,6 @@ h3{
     position: absolute;
     top: 16px;
     left: 16px;
-    /* border: 2px solid rgb(17, 17, 17); */
     border-radius: 6px;
 }
 .grate{
@@ -107,8 +106,6 @@ h3{
     opacity: 70%;
     position: absolute;
     box-shadow: inset 0px 0px 20px 20px rgb(0, 0, 0);
-    /* margin-left: -15px;
-    margin-top: -15px; */
 }
 
 .canvas{
@@ -164,24 +161,26 @@ h3{
 .elements{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: 100%;
 }
-.elements>div{
+/* --------------------------------------- */
+.toggle.icons{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: rgb(232, 234, 216);
-    
     height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
-.toggleContainer{
-    width: 80px;
-    margin: 0;
+.slider.icons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0px 2px;
 }
-.sliderContainer{
-    margin: 0px 40px;
+.invert{
+    filter: invert();
 }
 .size{
     background-color: rgb(220, 221, 207);
@@ -202,39 +201,37 @@ h3{
     width: 10px;
     height: 10px;
 }
-.buttonTitle{
-    margin-bottom: auto;
-    margin-top: 5px;
-    width: 100%;
-    text-align: center;
-}
-.buttonSubTitle{
-    margin-top: auto;
-    margin-bottom: 5px;
-    width: 100%;
-    text-align: center;
+/* --------------------------------------- */
+.container{
+    margin: 0px 8px;
     display: flex;
-    justify-content: center;
-    align-items:baseline;
-    padding-left:2px;
-}
-.buttonSubTitle.dots{
-    justify-content: space-between;
-    margin-bottom: 16px;
-}
-.buttonContainer{
-    display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 48px;
-    width: 100%;
+    justify-content: center;
+    color: rgb(232, 234, 216);
+    height: 100%;
 }
-
-
-.titles{
-    color: white;
+.container.button{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 10px 0px;
 }
-
+.container.slider{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px 0px;
+}
+.container.toggle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 80px;
+}
+/* --------------------------------------- */
 button.toggle.on {
     cursor: pointer;
     width: 36px;
@@ -254,7 +251,7 @@ button.toggle.off{
     border-radius: 5px;
     border: none;
 }
-.clearButton, .technicolor{
+.clear-button, .technicolor-button{
     width: 90px;
     height: 32px;
     cursor: pointer;
@@ -264,26 +261,49 @@ button.toggle.off{
     color: rgb(193, 194, 182);
     box-shadow: inset 0px -2px 2px rgb(15, 15, 15), 0px 1px 1px rgb(60, 60, 60), 0px -2px 3px rgb(0, 0, 0);
 }
-.clearButton{
+.clear-button{
     background-color: rgb(86, 59, 59);
 }
-.technicolorContainer{
-    display: flex;
-    flex-direction: column;
-}
-.technicolor{
-    /* background: linear-gradient(90deg, #204c9d,#af345e,#e2a138,#3c8852); */
+.technicolor-button{
     background-color: #454545;
 }
-.technicolorLight{
+.technicolor-light{
     width: 90px;
-    height: 3px;
-    background-color: red;
+    height: 4px;
+    background-color: rgb(4, 4, 4);
     margin:0;
+    border-radius: 3px;
+    box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.078);
 }
-.clearButton:active,.technicolor:active{
+.technicolor-light.on{
+    background: linear-gradient(90deg, #0496e5,#dd2eb4,#fced4f,#14ae19);
+    box-shadow: -2px 0px 10px #0d73a9, 0px -2px 5px #911374, 2px 0px 5px #0e9513,0px 1px 1px rgba(255, 255, 255, 0.078);
+}
+.clear-button:active,.technicolor-button:active{
     box-shadow: inset 0px -2px 2px rgb(15, 15, 15), 0px 1px 1px rgb(60, 60, 60), 0px -2px 3px rgb(0, 0, 0), inset 0px 0px 5px 5px rgba(0, 0, 0, 0.4);
     font-size: 13px;
+}
+.grid-slider{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background-color: black;
+    box-shadow: inset 0 -1px 1px rgb(65, 65, 65);
+}
+.grid-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 15px;
+    height: 24px; 
+    /* background: #454545;  */
+    background: linear-gradient(#454545,#707070,#454545);
+    border-radius: 4px;
+    cursor: pointer; 
+    box-shadow: inset 0px -1px 1px 1px rgb(0, 0, 0), inset 0px 1px 1px rgb(133, 133, 133);
+}
+
+.grid-slider::-moz-range-thumb {
 }
 /* --------------------------------------- */
 .row{
@@ -306,7 +326,6 @@ button.toggle.off{
     box-shadow: 0px 0px 3px white,1px 1px 1px blue,1px 1px 1px red;
     z-index: 10;
 }
-
 .paintedBlack{
     background-color: rgb(0, 0, 0);
 }
@@ -321,10 +340,6 @@ button.toggle.off{
     position: absolute;
     z-index: 20;
 }
-/* div.grid{
-    transition-property: all;
-    transition-duration: 1s;
-} */
 .highlight{
     border: solid 0.5px rgb(62, 62, 62)
 }
@@ -426,28 +441,6 @@ button.toggle.off{
     100% {
         translate: 0px 3300px;
     }
-  }
-  .slider{
-    -webkit-appearance: none;
-    appearance: none;
-    width: 150px;
-    height: 4px;
-    background-color: black;
-    box-shadow: inset 0 -1px 1px rgb(65, 65, 65);
-  }
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; 
-    appearance: none;
-    width: 15px;
-    height: 30px; 
-    /* background: #454545;  */
-    background: linear-gradient(#454545,#707070,#454545);
-    border-radius: 4px;
-    cursor: pointer; 
-    box-shadow: inset 0px -1px 1px 1px rgb(0, 0, 0), inset 0px 1px 1px rgb(133, 133, 133);
-  }
-
-  .slider::-moz-range-thumb {
   }
   /* --------------------------------------- */
   .stylus{

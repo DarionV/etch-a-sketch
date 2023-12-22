@@ -1,9 +1,10 @@
 const canvas = document.querySelector('.canvas');
-const clearButton = document.querySelector('.clearButton');
-const paintButton = document.querySelector('.paintButton');
-const gridToggleButton = document.querySelector('.button.toggleGrid');
-const gridSlider = document.querySelector('#grid-slider');
-const technicolorButton = document.querySelector('.technicolor');
+const clearButton = document.querySelector('.clear-button');
+const paintButton = document.querySelector('.paint-button');
+const gridToggleButton = document.querySelector('.grid-button');
+const gridSlider = document.querySelector('.grid-slider');
+const technicolorButton = document.querySelector('.technicolor-button');
+const technicolorLight = document.querySelector('.technicolor-light');
 
 const technicolor = ['3e8dcf', '883274', 'd9373a', 'e26e38', 'fced4f', '4aa44d','cedb51','53b6ed','204c9d','5f318c','f6c546'];
 
@@ -78,7 +79,13 @@ function changeGridSize(size){
 
 function toggleTechnicolor(){
     clearCanvas();
-    (isTechnicolor) ? isTechnicolor = false : isTechnicolor = true;
+    if (isTechnicolor) { 
+        isTechnicolor = false;
+        technicolorLight.classList.remove('on');
+     } else {
+        isTechnicolor = true;
+        technicolorLight.classList.add('on');
+     }
 }
 
 function toggleGrid(shouldToggleButton){
