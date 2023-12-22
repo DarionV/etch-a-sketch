@@ -37,6 +37,8 @@ h3{
     position:absolute;
     rotate: -20deg;
     translate: -520px 400px;
+    opacity: 90%;
+    filter: brightness(50%);
 }
 .frame{
     display: flex;
@@ -281,16 +283,12 @@ button.toggle.off{
     width: 8px;
     height: 8px;
 }
-/* .paintedWhite{
-    background-color: white;
-    box-shadow: -10px -10px 10px red, 10px 10px 20px blue;
-    z-index: 10;
-} */
 .paintedWhite{
     background-color: white;
     box-shadow: 0px 0px 3px white,1px 1px 1px blue,1px 1px 1px red;
     z-index: 10;
 }
+
 .paintedBlack{
     background-color: rgb(0, 0, 0);
 }

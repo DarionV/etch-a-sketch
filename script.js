@@ -3,12 +3,19 @@ const clearButton = document.querySelector('.clearButton');
 const paintButton = document.querySelector('.paintButton');
 const gridToggleButton = document.querySelector('.button.toggleGrid');
 const gridSlider = document.querySelector('#grid-slider');
+const technicolorButton = document.querySelector('.technicolor');
+
+const technicolor = ['3e8dcf', '883274', 'd9373a', 'e26e38', 'fced4f', '4aa44d','cedb51','53b6ed','204c9d','5f318c','f6c546'];
 
 let gridSize = 64;
 
 let isDrawing = false;
 let isErasing = false;
 let isGridVisible = false;
+let isTechnicolor = false;
+
+let currentRandomInt;
+let randomInt;
 
 let PIXEL_SIZE = 8;
 let CANVAS_SIZE = 512;
@@ -26,6 +33,7 @@ document.addEventListener('mouseup',() => {
 
 document.addEventListener('mousemove', paint);
 
+technicolorButton.addEventListener('click',toggleTechnicolor);
 
 clearButton.addEventListener('click', clearCanvas);
 paintButton.addEventListener('click', ()=>{
@@ -68,7 +76,14 @@ function changeGridSize(size){
     generateGrid();
 }
 
+function toggleTechnicolor(){
+    clearCanvas();
+    (isTechnicolor) ? isTechnicolor = false : isTechnicolor = true;
+}
+
 function toggleGrid(shouldToggleButton){
+
+    getRandomColor();
 
     if(shouldToggleButton){
     gridToggleButton.classList.toggle('off');
@@ -109,16 +124,15 @@ function changeGrid(){
 
 function toggleHighlight(event){
    if(!isGridVisible) event.target.classList.toggle('highlight');
+   resetActivePixels();
 }
 
 function paint(event){
-    //isDrawing = true;
-    // paintPixel(event);
-    
-
-    if(!event.target.classList.contains('grid') || !isDrawing) {
+ 
+    if(!event.target.classList.contains('grid') || !isDrawing ) {
         return
     } else {
+        let randomColor = getRandomColor();
         event.preventDefault();
         let targetPixel = document.elementFromPoint(event.clientX,event.clientY);
         let rect = targetPixel.getBoundingClientRect();
@@ -133,12 +147,25 @@ function paint(event){
                 let pixelsToPaint = elements.find(checkPixel);
                 
                 if(!isErasing) {
+                    if(pixelsToPaint.classList.contains('active')) return;
+                    
+                    pixelsToPaint.classList.add('active');
+
+                    if(isTechnicolor) { 
+                        pixelsToPaint.style.backgroundColor = randomColor;
+                        pixelsToPaint.style.boxShadow = `0px 0px 15px ${randomColor}`;
+                        pixelsToPaint.style.filter='brightness(130%)';
+                    }
                     pixelsToPaint.classList.add('paintedWhite');
                     pixelsToPaint.classList.remove('paintedBlack');
+
+                    
+                   
                 }
                 else {
                      pixelsToPaint.classList.add('paintedBlack');
                      pixelsToPaint.classList.remove('paintedWhite');
+                     pixelsToPaint.style = '';
                 }    
                 coordinateToPaintX += PIXEL_SIZE;
             }
@@ -159,6 +186,15 @@ function clearCanvas(){
     let pixels = document.querySelectorAll('.pixel');
     pixels.forEach((pixel) => {
         pixel.classList.remove('paintedWhite');
+        pixel.classList.add('paintedBlack');
+        pixel.style = '';
+    })
+}
+
+function resetActivePixels(){
+    let pixels = document.querySelectorAll('.pixel');
+    pixels.forEach((pixel) => {
+        pixel.classList.remove('active');
     })
 }
 
@@ -218,6 +254,20 @@ function clearGrid(){
     gridArray.forEach((element)=>{
         element.remove();
     })
+}
+
+function getRandomColor(){
+    let randomColorIndex = getRandomInt(technicolor.length)
+    return ('#' + technicolor[randomColorIndex]);
+}
+
+//will not produce same number twice in a row
+function getRandomInt(max){
+    while(randomInt == currentRandomInt) {
+     randomInt = Math.floor(Math.random() * max);
+    }
+    currentRandomInt = randomInt;
+    return randomInt; 
 }
 
 generatePixels();
