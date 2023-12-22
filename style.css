@@ -305,7 +305,6 @@ button.toggle.off{
     appearance: none;
     width: 15px;
     height: 24px; 
-    /* background: #454545;  */
     background: linear-gradient(#454545,#707070,#454545);
     border-radius: 4px;
     cursor: pointer; 
@@ -313,6 +312,14 @@ button.toggle.off{
 }
 
 .grid-slider::-moz-range-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 15px;
+    height: 24px; 
+    background: linear-gradient(#454545,#707070,#454545);
+    border-radius: 4px;
+    cursor: pointer; 
+    box-shadow: inset 0px -1px 1px 1px rgb(0, 0, 0), inset 0px 1px 1px rgb(133, 133, 133);
 }
 /* --------------------------------------- */
 .row{
@@ -502,6 +509,14 @@ button.toggle.off{
     width: 90%;
     filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.537));
   }
+  .pen-holder, .pen-holder.overlay{
+    width: 40px;
+    height: 100px;
+    position: absolute;
+    translate: 320px -200px;
+    background: linear-gradient(90deg,rgb(0, 0, 0), rgb(44, 44, 44) 70%,rgb(105, 105, 105));
+  }
+  
  
    
 

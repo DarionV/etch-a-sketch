@@ -37,11 +37,13 @@ document.addEventListener('mousemove', paint);
 technicolorButton.addEventListener('click',toggleTechnicolor);
 
 clearButton.addEventListener('click', clearCanvas);
+
 paintButton.addEventListener('click', ()=>{
     (isErasing) ? isErasing = false : isErasing = true;
     paintButton.classList.toggle('off');
     paintButton.classList.toggle('on');
 })
+
 gridSlider.oninput = function() {
     changeGridSize(this.value);
 }
@@ -57,7 +59,6 @@ gridSlider.addEventListener('mouseup', ()=>{
         toggleGrid(false);
     }
 }) 
-
 
 gridToggleButton.addEventListener('click', ()=> {toggleGrid(true)});
 
@@ -113,7 +114,6 @@ function toggleGrid(shouldToggleButton){
     }
 }
 
-
 function changeGrid(){
     switch(gridSize){
         case 8: gridSize = 16;
@@ -165,9 +165,6 @@ function paint(event){
                     }
                     pixelsToPaint.classList.add('paintedWhite');
                     pixelsToPaint.classList.remove('paintedBlack');
-
-                    
-                   
                 }
                 else {
                      pixelsToPaint.classList.add('paintedBlack');
@@ -268,7 +265,6 @@ function getRandomColor(){
     return ('#' + technicolor[randomColorIndex]);
 }
 
-//will not produce same number twice in a row
 function getRandomInt(max){
     while(randomInt == currentRandomInt) {
      randomInt = Math.floor(Math.random() * max);
