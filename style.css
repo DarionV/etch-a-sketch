@@ -9,14 +9,13 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(174, 174, 174);
+    background: linear-gradient(rgb(212, 212, 212), rgb(191, 191, 188));
     font-family: 'Raleway', sans-serif;
     overflow: hidden;
 }
 h3{
     font-size: 12px;
     font-weight: 400;
-    
 }
 .footer{
     width: 100%;
@@ -26,6 +25,16 @@ h3{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.footer>img{
+    margin: 0px 4px;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    color: rgb(85, 85, 85);
 }
 /* --------------------------------------- */
 .cord {
