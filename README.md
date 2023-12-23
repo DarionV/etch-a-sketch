@@ -18,11 +18,11 @@ I took some liberties and removed some of the requested features from the origin
 
 ## Problems
 
- - **Problem** 
+ - **Problem** <br>
  An issue I identified early was that it wouldn't be possible to combine different grid sizes when drawing. I wanted the
    user to be able to draw with a small brush then, change to a bigger
    size and continue drawing with the canvas being unchanged.
- - **Solution** 
+ - **Solution** <br>
  I decided to generate a grid with the smallest grid size. This grid of divs would act as the pixels that would light up.
    They will never change size.
    
@@ -31,21 +31,21 @@ I took some liberties and removed some of the requested features from the origin
    element on this grid, the app checks the bounding box coordinates for
    the grid element and finds the pixels that corresponds to the same
    coordinates. It then paints the pixels.
- - **Problem** 
+ - **Problem** <br>
  In my previous project, "Rock, Paper, Scissors", I used a lot of images and sounds that increased the load time of the page. I
    wanted to still have a visually pleasing page but with faster load
    time.
- - **Solution** 
+ - **Solution** <br>
  Instead of relying too much on images I tried creating the graphics with CSS. It was a good opportunity to practice and
    learn different CSS techniques. Every element except for the coiled
    cord, the noise effect on the tablet, and the reflections in the
    screen is done with CSS.
- - **Problem** 
+ - **Problem** <br>
  I knew I wanted to have a screen with an old CRT-monitor feel to it with flickering and scanlines and some chromatic
    aberration. My initial thought was to create a   red and a blue
    colored div with offset in different directions for each pixels but
    that would turn out to be too unpractical.
- - **Solution** 
+ - **Solution** <br>
  For the CRT-effect I added a small shadow that matched the pixel color so that the pixels would look a bit blurry. For the
    flickering, I added a black div and key framed the opacity. I found a
    tutorial online that already had the key frames laid out for a nice
@@ -55,11 +55,11 @@ I took some liberties and removed some of the requested features from the origin
    For the chromatic aberration I learned that its possible to have
    multiple shadows on the same element. That way I could make a red
    shadow and a blue shadow to create a chromatic aberration effect.
- - **Problem** 
+ - **Problem** <br>
  When browsing through the other submissions for this project I noticed that there was never a visual feedback when
    changing the grid size which made it hard to dial in the size you
    wanted.
- - **Solution** 
+ - **Solution** <br>
  Keep track of if the grid is toggled on or not by the user. If not, display the grid while changing the size. I think it
    makes for a bit nicer user experience.
 
