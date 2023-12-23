@@ -259,6 +259,7 @@ button.toggle.on {
     box-shadow: inset 0px 1px 2px rgb(0, 0, 0), inset 0px -2px 2px rgb(0, 0, 0), 0px -2px 1px 1px rgba(255, 255, 255, 0.05);
     border-radius: 5px;
     border: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 button.toggle.off{
     cursor: pointer;
@@ -278,6 +279,7 @@ button.toggle.off{
     margin-bottom: 0px;
     color: rgb(193, 194, 182);
     box-shadow: inset 0px -2px 2px rgb(15, 15, 15), 0px 1px 1px rgb(60, 60, 60), 0px -2px 3px rgb(0, 0, 0);
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 .clear-button{
     background-color: rgb(86, 59, 59);
@@ -527,22 +529,20 @@ button.toggle.off{
   }
 
   @media screen and (max-width: 400px) {
-    .body{
-
-    }
     .stylus, .cord, .footer{
         display: none;
     }
     .frame{
         width: 370px;
-        height: 100%;
-        margin-top: 0px;
+        height: 90vh;
         box-shadow: none;
+        justify-content: none;
+        margin-top: 05px;
+        margin-bottom: auto;
     }
     .monitor{
         width: 320px;
-        height: 448px;
-        margin: 0px;
+        height: 400px;
     }
     .canvas{
         margin: 0px;
@@ -552,8 +552,8 @@ button.toggle.off{
         width: 340px
     }
     .header{
-        margin: 0px 0px;
-        padding: 0px 0px;
+        margin: 8px 0px;
+        text-align: center;
     }
     button.toggle.on {
         width: 48px;
