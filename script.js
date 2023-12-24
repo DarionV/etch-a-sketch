@@ -15,13 +15,10 @@ let isErasing = false;
 let isGridVisible = false;
 let isTechnicolor = false;
 
-let currentRandomInt;
 let randomInt;
 
 let PIXEL_SIZE = 8;
 let CANVAS_SIZE = 512;
-
-
 
 document.addEventListener('mousedown',(event)=>{
     isDrawing=true 
@@ -118,78 +115,71 @@ function toggleGrid(shouldToggleButton){
         });
     }
 }
-
-function changeGrid(){
-    switch(gridSize){
-        case 8: gridSize = 16;
-        break;
-        case 16: gridSize = 32;
-        break;
-        case 32: gridSize = 64;
-        break;
-        case 64: gridSize = 8;
-        break;
-    }
-    clearGrid();
-    generateGrid();
-}
-
 function toggleHighlight(event){
    if(!isGridVisible) event.target.classList.toggle('highlight');
    resetActivePixels();
 }
-
 function paint(event){
+    if(!event.target.classList.contains('grid') || !isDrawing ) return;
 
-    let targetPixel;
- 
-    if(!event.target.classList.contains('grid') || !isDrawing ) {
-        return
-    } else {
-        let randomColor = getRandomColor();
-        event.preventDefault();
-        if(event.touches == undefined) {
-             targetPixel = document.elementFromPoint(event.clientX,event.clientY);
-        }
-        else { 
-            targetPixel = document.elementFromPoint(event.touches[0].clientX,event.touches[0].clientY);
-        }
-        let rect = targetPixel.getBoundingClientRect();
+    event.preventDefault();
+    let selectedSquare = getPixelCoordinates(event);
+    paintPixels(selectedSquare, getRandomColor());
+}
+function getPixelCoordinates(event){
+    if(event.touches == undefined) {
+        return  document.elementFromPoint(event.clientX,event.clientY);
+   }
+   else { 
+       return document.elementFromPoint(event.touches[0].clientX,event.touches[0].clientY);
+   }
+}
+function paintPixels(selectedSquare, randomColor){
+    let rect = selectedSquare.getBoundingClientRect();
+    let coordinateToPaintY = rect.y;
 
-        let coordinateToPaintY = rect.y;
-        
-        for(let i = PIXEL_SIZE; i <= CANVAS_SIZE / gridSize; i += PIXEL_SIZE){
-            let coordinateToPaintX = rect.x;
+    for(let i = PIXEL_SIZE; i <= CANVAS_SIZE / gridSize; i += PIXEL_SIZE){
+        let coordinateToPaintX = rect.x;
 
-            for (let i = PIXEL_SIZE; i <= CANVAS_SIZE / gridSize; i += PIXEL_SIZE){
-                let elements = document.elementsFromPoint(coordinateToPaintX,coordinateToPaintY);
-                let pixelsToPaint = elements.find(checkPixel);
-                
-                if(!isErasing) {
-                    if(pixelsToPaint.classList.contains('active')) return;
-                    
-                    pixelsToPaint.classList.add('active');
-
-                    if(isTechnicolor) { 
-                        pixelsToPaint.style.backgroundColor = randomColor;
-                        pixelsToPaint.style.boxShadow = `0px 0px 15px ${randomColor}`;
-                        pixelsToPaint.style.filter='brightness(130%)';
-                    }
-                    pixelsToPaint.classList.add('paintedWhite');
-                    pixelsToPaint.classList.remove('paintedBlack');
-                }
-                else {
-                     pixelsToPaint.classList.add('paintedBlack');
-                     pixelsToPaint.classList.remove('paintedWhite');
-                     pixelsToPaint.style = '';
-                }    
-                coordinateToPaintX += PIXEL_SIZE;
+        for (let i = PIXEL_SIZE; i <= CANVAS_SIZE / gridSize; i += PIXEL_SIZE){
+            let elements = document.elementsFromPoint(coordinateToPaintX,coordinateToPaintY);
+            let pixelsToPaint = elements.find(checkPixel);
+            
+            if(!isErasing) { 
+                paintSelectedPixels(pixelsToPaint,randomColor);
             }
-            coordinateToPaintY += PIXEL_SIZE;
+            else {
+                paintBlack(pixelsToPaint); 
+            }
+            coordinateToPaintX += PIXEL_SIZE;
         }
+        coordinateToPaintY += PIXEL_SIZE;
     }
 }
+function paintSelectedPixels(pixels, randomColor){
+    if(pixels.classList.contains('active')) return;
+                
+    pixels.classList.add('active');
 
+    if(isTechnicolor) paintTechnicolor(pixels, randomColor);
+
+    //Will add a class and will not effect technicolored pixels
+    paintWhite(pixels);
+}
+function paintWhite(pixels){
+    pixels.classList.add('paintedWhite');
+    pixels.classList.remove('paintedBlack');
+}
+function paintTechnicolor(pixels, randomColor){
+    pixels.style.backgroundColor = randomColor;
+    pixels.style.boxShadow = `0px 0px 15px ${randomColor}`;
+    pixels.style.filter='brightness(130%)';
+}
+function paintBlack(pixels){
+    pixels.classList.add('paintedBlack');
+    pixels.classList.remove('paintedWhite');
+    pixels.style = '';
+}
 function checkPixel (element) {
     return element.classList.contains('pixel');
 }
@@ -197,7 +187,6 @@ function checkPixel (element) {
 function paintPixel(event) {
     if(isDrawing && event.target.classList.contains('pixel')) event.target.classList.add('painted')
 }
-
 function clearCanvas(){
     let pixels = document.querySelectorAll('.pixel');
     pixels.forEach((pixel) => {
@@ -206,14 +195,12 @@ function clearCanvas(){
         pixel.style = '';
     })
 }
-
 function resetActivePixels(){
     let pixels = document.querySelectorAll('.pixel');
     pixels.forEach((pixel) => {
         pixel.classList.remove('active');
     })
 }
-
 function generatePixels() {
     for (let i = 0; i < CANVAS_SIZE / PIXEL_SIZE; i++) {
 
@@ -228,44 +215,51 @@ function generatePixels() {
         }
     }
 }
-
 function generateGrid() {
-    let gridY = 0;
+    let squareY = 0;
 
     for (let i = 0; i < gridSize; i++) {
-        let gridX = 0;
-        let row = document.createElement('div');
-        row.classList.add('gridRow');
-        canvas.appendChild(row);
+        let squareX = 0;
+        let row = addRow();
 
         for (let i = 0; i < gridSize; i++) {
-            let grid = document.createElement('div');
-            grid.classList.add('grid');
-            grid.style.left = gridX + 'px';
-            grid.style.top = gridY + 'px';
-            switch(gridSize){
-                case 8: grid.classList.add('size8');
-                break;
-                case 16: grid.classList.add('size16');
-                break;
-                case 32: grid.classList.add('size32');
-                break;
-                case 64: grid.classList.add('size64');
-                break;
-                default: grid.classList.add('size32');
-            }
-            grid.addEventListener('mouseenter', toggleHighlight);
-            grid.addEventListener('mouseleave', toggleHighlight);
-            grid.addEventListener('pointerenter', toggleHighlight);
-            grid.addEventListener('pointerleave', toggleHighlight);
-            if(isGridVisible) grid.classList.add('highlight');
-            row.appendChild(grid);
-            gridX += CANVAS_SIZE / gridSize;
+            let square = createSquare(squareX, squareY);
+            row.appendChild(square);
+            squareX += CANVAS_SIZE / gridSize;
         }
-        gridY += CANVAS_SIZE / gridSize;
+        squareY += CANVAS_SIZE / gridSize;
     }
 }
+function createSquare(x,y){
+    let square = document.createElement('div');
+    square.classList.add('grid');
+    square.style.left = x + 'px';
+    square.style.top = y + 'px';
+    switch(gridSize){
+        case 8: square.classList.add('size8');
+        break;
+        case 16: square.classList.add('size16');
+        break;
+        case 32: square.classList.add('size32');
+        break;
+        case 64: square.classList.add('size64');
+        break;
+        default: square.classList.add('size32');
+    }
+    square.addEventListener('mouseenter', toggleHighlight);
+    square.addEventListener('mouseleave', toggleHighlight);
+    square.addEventListener('pointerleave', resetActivePixels);
 
+    if(isGridVisible) square.classList.add('highlight');
+
+    return square;
+}
+function addRow(){
+    let row = document.createElement('div');
+    row.classList.add('gridRow');
+    canvas.appendChild(row);
+    return row;
+}
 function clearGrid(){
     let gridList = document.querySelectorAll('.gridRow');
     let gridArray = [...gridList];
@@ -273,17 +267,12 @@ function clearGrid(){
         element.remove();
     })
 }
-
 function getRandomColor(){
     let randomColorIndex = getRandomInt(technicolor.length)
     return ('#' + technicolor[randomColorIndex]);
 }
-
 function getRandomInt(max){
-    while(randomInt == currentRandomInt) {
-     randomInt = Math.floor(Math.random() * max);
-    }
-    currentRandomInt = randomInt;
+    randomInt = Math.floor(Math.random() * max);
     return randomInt; 
 }
 
