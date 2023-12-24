@@ -34,6 +34,11 @@ document.addEventListener('mouseup',() => {
 
 document.addEventListener('mousemove', paint);
 
+document.addEventListener('touchmove', (element)=>{
+    isDrawing = true;
+    paint(element);
+});
+
 technicolorButton.addEventListener('click',toggleTechnicolor);
 
 clearButton.addEventListener('click', clearCanvas);
@@ -135,13 +140,20 @@ function toggleHighlight(event){
 }
 
 function paint(event){
+
+    let targetPixel;
  
     if(!event.target.classList.contains('grid') || !isDrawing ) {
         return
     } else {
         let randomColor = getRandomColor();
         event.preventDefault();
-        let targetPixel = document.elementFromPoint(event.clientX,event.clientY);
+        if(event.touches == undefined) {
+             targetPixel = document.elementFromPoint(event.clientX,event.clientY);
+        }
+        else { 
+            targetPixel = document.elementFromPoint(event.touches[0].clientX,event.touches[0].clientY);
+        }
         let rect = targetPixel.getBoundingClientRect();
 
         let coordinateToPaintY = rect.y;
@@ -244,6 +256,8 @@ function generateGrid() {
             }
             grid.addEventListener('mouseenter', toggleHighlight);
             grid.addEventListener('mouseleave', toggleHighlight);
+            grid.addEventListener('pointerenter', toggleHighlight);
+            grid.addEventListener('pointerleave', toggleHighlight);
             if(isGridVisible) grid.classList.add('highlight');
             row.appendChild(grid);
             gridX += CANVAS_SIZE / gridSize;

@@ -608,6 +608,9 @@ button.toggle.off{
     .technicolor-light{
         width: 74px;
     }
+    .grid{
+        touch-action: none;
+    }
   }
   
  
