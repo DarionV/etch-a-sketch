@@ -120,13 +120,16 @@ function toggleHighlight(event){
    resetActivePixels();
 }
 function paint(event){
+    console.log('paint');
     if(!event.target.classList.contains('grid') || !isDrawing ) return;
 
     event.preventDefault();
     let selectedSquare = getPixelCoordinates(event);
-    paintPixels(selectedSquare, getRandomColor());
+    let randomColor = getRandomColor();
+    paintPixels(selectedSquare, randomColor);
 }
 function getPixelCoordinates(event){
+    console.log('getPixelsCoordinates');
     if(event.touches == undefined) {
         return  document.elementFromPoint(event.clientX,event.clientY);
    }
@@ -135,6 +138,7 @@ function getPixelCoordinates(event){
    }
 }
 function paintPixels(selectedSquare, randomColor){
+    console.log('paintPixels');
     let rect = selectedSquare.getBoundingClientRect();
     let coordinateToPaintY = rect.y;
 
@@ -144,6 +148,7 @@ function paintPixels(selectedSquare, randomColor){
         for (let i = PIXEL_SIZE; i <= CANVAS_SIZE / gridSize; i += PIXEL_SIZE){
             let elements = document.elementsFromPoint(coordinateToPaintX,coordinateToPaintY);
             let pixelsToPaint = elements.find(checkPixel);
+            if(pixelsToPaint.classList.contains('active')) return;
             
             if(!isErasing) { 
                 paintSelectedPixels(pixelsToPaint,randomColor);
@@ -157,6 +162,7 @@ function paintPixels(selectedSquare, randomColor){
     }
 }
 function paintSelectedPixels(pixels, randomColor){
+
     if(pixels.classList.contains('active')) return;
                 
     pixels.classList.add('active');
@@ -185,7 +191,7 @@ function checkPixel (element) {
 }
 
 function paintPixel(event) {
-    if(isDrawing && event.target.classList.contains('pixel')) event.target.classList.add('painted')
+    if(isDrawing && event.target.classList.contains('pixel')) event.target.classList.add('painted');
 }
 function clearCanvas(){
     let pixels = document.querySelectorAll('.pixel');
